@@ -1,7 +1,14 @@
+using Antra.MoviesCRM.Infrastructure.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services
+    .AddSqlServer<MovieCrmDbContext>(
+    builder.Configuration.GetConnectionString("MovieCRM")
+    );
 
 var app = builder.Build();
 
