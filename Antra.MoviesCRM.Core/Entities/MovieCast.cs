@@ -7,17 +7,14 @@ using System.Threading.Tasks;
 
 namespace Antra.MoviesCRM.Core.Entities
 {
-    public class Review
+    public class MovieCast
     {
         [Column(TypeName = "int")]
         public int MovieId { get; set; }
         [Column(TypeName = "int")]
-        public int UserId { get; set; }
-        [Column(TypeName = "decimal(3,2)")]
-        public decimal Rating { get; set; }
-
-        [Column(TypeName = "nvarchar(MAX)")]
-        public string? ReviewText { get; set; }
+        public int CastId { get; set; }
+        [Column(TypeName = "nvarchar(450)")]
+        public string Character { get; set; }
 
     }
 }

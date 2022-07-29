@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Antra.MoviesCRM.Core.Entities
 {
-    public class Crew
+    public class Cast
     {
         [Column(TypeName = "int")]
         public int Id { get; set; }
