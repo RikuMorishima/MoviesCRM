@@ -15,10 +15,9 @@ namespace Antra.MoviesCRM.Infrastructure.Services
 
         }
 
-        public IEnumerable<MovieModel> GetMoviesByGenre(int genreId, int pageSize, int pageNumber)
+        public async Task<IEnumerable<MovieModel>> GetMoviesByGenre(int genreId, int pageSize, int pageNumber)
         {
-            //return await ((MovieRepository)movieRepository).GetByIdAsync(castId);
-            throw new NotImplementedException();
+            return await ((MovieRepository)movieRepository).GetAllByGenreIdPaginatedAsync(genreId,pageSize,pageNumber);
         }
     }
 }

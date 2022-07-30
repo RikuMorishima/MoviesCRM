@@ -39,6 +39,8 @@ namespace Antra.MoviesCRM.Infrastructure.Repository
                         Character = mc.Character
                     };
                     Movie movie = await db.Set<Movie>().FindAsync(mc.MovieId);
+                    if (movie == null)
+                        return;
                     movieCastModel.MovieModelRef = new MovieModel()
                     {
                         Id = movie.Id,

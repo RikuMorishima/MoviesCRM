@@ -1,4 +1,5 @@
 ﻿using Antra.MoviesCRM.Core.Contracts.Services;
+using Antra.MoviesCRM.Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Antra.MoviesCRM.WebMVC.Controllers
@@ -16,10 +17,11 @@ namespace Antra.MoviesCRM.WebMVC.Controllers
         }
 
         [HttpGet]
-        public Task<IActionResult> MoviesByGenre(int id, int pageSize=30,int pageNumber=1)
+        public async Task<IActionResult> MoviesByGenre(int id, int pageSize=30,int pageNumber=1)
         {
-            //var data = movieService.
-            throw new NotImplementedException();
+            var data = await ((MovieService)movieService)
+                .GetMoviesByGenre(id, pageSize, pageNumber);
+            return View(data);
         }
     }
 }

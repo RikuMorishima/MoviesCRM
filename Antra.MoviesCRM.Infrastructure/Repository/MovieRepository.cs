@@ -2,10 +2,11 @@
 using Antra.MoviesCRM.Core.Entities;
 using Antra.MoviesCRM.Core.Models;
 using Antra.MoviesCRM.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Antra.MoviesCRM.Infrastructure.Repository
 {
-    public class MovieRepository : BaseRepositoryAsync<CastModel>, IMovieRepository
+    public class MovieRepository : BaseRepositoryAsync<MovieModel>, IMovieRepository
     {
         public MovieRepository(MovieCrmDbContext _context) : base(_context)
         {
@@ -36,30 +37,25 @@ namespace Antra.MoviesCRM.Infrastructure.Repository
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<Movie>> GetAllByGenreIdAsync(int genreId)
+        public async Task<IEnumerable<MovieModel>> GetAllByGenreIdPaginatedAsync(int genreId, int pageSize,int pageNum)
         {
-            /*var genre = await db.Set<Genre>().FindAsync(genreId);
+            var genre = await db.Set<Genre>().FindAsync(genreId);
 
             if (genre == null)
                 return null;
-            GenreModel genreModel = new GenreModel()
-            {
-                Id = genre.Id,
-                Name = genre.Name
-            };
+        
 
-            IEnumerable<MovieGenreModel> movieGenreModels = new List<MovieGenreModel>();
-            await db.Set<MovieGenre>().Where(x => x.GenreId == genreId).ForEachAsync(
+            IEnumerable<MovieModel> movieModels = new List<MovieModel>();
+            _ = db.Set<MovieGenre>().Where(x => x.GenreId == genreId)
+                .Skip((pageNum - 1) * pageSize).Take(pageSize).ForEachAsync(
                 async delegate (MovieGenre mg)
                 {
-                    MovieCastModel movieCastModel = new MovieCastModel()
-                    {
-                        CastId = mg.CastId,
-                        MovieId = mg.MovieId,
-                        Character = mg.Character
-                    };
+                    if (mg == null)
+                        return;
                     Movie movie = await db.Set<Movie>().FindAsync(mg.MovieId);
-                    movieCastModel.MovieModelRef = new MovieModel()
+                    if (movie == null)
+                        return;
+                    _ = movieModels.Append(new MovieModel()
                     {
                         Id = movie.Id,
                         Title = movie.Title,
@@ -79,11 +75,10 @@ namespace Antra.MoviesCRM.Infrastructure.Repository
                         UpdatedDate = movie.UpdatedDate,
                         UpdatedBy = movie.UpdatedBy,
                         CreatedBy = movie.CreatedBy
-                    };
-                    _ = castModel.Movies.Append(movieCastModel);
+                    });
                 });
-            return castModel;*/
-            throw new NotImplementedException();
+            return movieModels;
+
         }
 
     }
