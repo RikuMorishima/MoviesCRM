@@ -1,6 +1,7 @@
 ﻿using Antra.MoviesCRM.Core.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -10,15 +11,11 @@ namespace Antra.MoviesCRM.Core.Models
 {
     public class CastModel
     {
-        [Column(TypeName = "int")]
         public int Id { get; set; }
-        [Column(TypeName = "nvarchar(128)")]
+        [MaxLength(128, ErrorMessage = "Name must be less than 128 characters long")]
         public string? Name { get; set; }
-        [Column(TypeName = "nvarchar(MAX)")]
         public string? Gender { get; set; }
-        [Column(TypeName = "nvarchar(MAX)")]
         public string? TmdbUrl { get; set; }
-        [Column(TypeName = "nvarchar(2084)")]
         public string? ProfilePath { get; set; }
 
         //Navigation Properties

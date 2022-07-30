@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -11,39 +12,32 @@ namespace Antra.MoviesCRM.Core.Models
     {
         [Column(TypeName = "int")]
         public int Id { get; set; }
-        [Column(TypeName = "nvarchar(256)")]
+        [Required(ErrorMessage = "Title is Required")]
+        [MaxLength(256, ErrorMessage = "Title must be less than 256 characters long")]
         public string Title { get; set; }
-        [Column(TypeName = "nvarchar(MAX)")]
         public string? Overview { get; set; }
-        [Column(TypeName = "nvarchar(512)")]
+        [MaxLength(512, ErrorMessage = "Tagline must be less than 512 characters long")]
         public string? Tagline { get; set; }
-        [Column(TypeName = "decimal(18,2)")]
         public decimal? Budget { get; set; }
-        [Column(TypeName = "decimal(18,2)")]
         public decimal? Revenue { get; set; }
-        [Column(TypeName = "nvarchar(2084)")]
+        [MaxLength(2084, ErrorMessage = "ImdbUrl must be less than 2084 characters long")]
         public string? ImdbUrl { get; set; }
-        [Column(TypeName = "nvarchar(2084)")]
+        [MaxLength(2084, ErrorMessage = "TmdbUrl must be less than 2084 characters long")]
         public string? TmdbUrl { get; set; }
-        [Column(TypeName = "nvarchar(2084)")]
+        [MaxLength(2084, ErrorMessage = "PosterUrl must be less than 2084 characters long")]
         public string? PosterUrl { get; set; }
-        [Column(TypeName = "nvarchar(2084)")]
+        [MaxLength(2084, ErrorMessage = "BackDropUrl must be less than 2084 characters long")]
         public string? BackDropUrl { get; set; }
-        [Column(TypeName = "nvarchar(64)")]
+        [MaxLength(64, ErrorMessage = "OriginalLanguage must be less than 2084 characters long")]
         public string? OriginalLanguage { get; set; }
-        [Column(TypeName = "datetime2(7)")]
         public DateTime? ReleaseDate { get; set; }
-        [Column(TypeName = "int")]
         public int? RunTime { get; set; }
-        [Column(TypeName = "decimal(5,2)")]
         public decimal? Price { get; set; }
-        [Column(TypeName = "datetime2(7)")]
         public DateTime? CreatedDate { get; set; }
-        [Column(TypeName = "datetime2(7)")]
         public DateTime? UpdatedDate { get; set; }
-        [Column(TypeName = "nvarchar(MAX)")]
         public string? UpdatedBy { get; set; }
-        [Column(TypeName = "nvarchar(MAX)")]
         public string? CreatedBy { get; set; }
+
+        public IEnumerable<CastModel> Casts { get; set; } = new List<CastModel>();
     }
 }
