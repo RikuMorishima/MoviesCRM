@@ -45,5 +45,7 @@ namespace Antra.MoviesCRM.Core.Entities
         public string? UpdatedBy { get; set; }
         [Column(TypeName = "nvarchar(MAX)")]
         public string? CreatedBy { get; set; }
+
+
     }
 }

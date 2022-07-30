@@ -21,5 +21,8 @@ namespace Antra.MoviesCRM.Core.Entities
         public DateTime PurchaseDateTime { get; set; }
         [Column(TypeName = "int")]
         public int MovidId { get; set; }
+
+        public IEnumerable<Movie> Movies { get; set; } = new List<Movie>();
+        public IEnumerable<User> Users { get; set; } = new List<User>();
     }
 }

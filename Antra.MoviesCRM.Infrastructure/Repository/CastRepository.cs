@@ -15,7 +15,7 @@ namespace Antra.MoviesCRM.Infrastructure.Repository
 
         public override async Task<Cast> GetByIdAsync(int id)
         {
-            var cast = await db.Set<Cast>().FindAsync(id);
+            /*var cast = await db.Set<Cast>().FindAsync(id);
             if (cast == null) 
                 return null;
 
@@ -24,7 +24,8 @@ namespace Antra.MoviesCRM.Infrastructure.Repository
                 {
                     _ = cast.Movies.Append(await db.Set<Movie>().FindAsync(mc.MovieId));
                 });
-            return cast;
+            return cast;*/
+            throw new NotSupportedException();
         }
 
     }

@@ -19,5 +19,8 @@ namespace Antra.MoviesCRM.Core.Entities
         [Column(TypeName = "nvarchar(128)")]
         public string Job { get; set; }
 
+        public IEnumerable<Movie> Movies { get; set; } = new List<Movie>();
+        public IEnumerable<Crew> Crews { get; set; } = new List<Crew>();
+
     }
 }
