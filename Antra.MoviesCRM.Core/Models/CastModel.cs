@@ -19,7 +19,7 @@ namespace Antra.MoviesCRM.Core.Models
         public string? ProfilePath { get; set; }
 
         //Navigation Properties
-        public IEnumerable<MovieModel> Movies { get; set; } = new List<MovieModel>();
+        public IEnumerable<MovieCastModel> Movies { get; set; } = new List<MovieCastModel>();
 
     }
 }

@@ -19,8 +19,10 @@ namespace Antra.MoviesCRM.Core.Entities
         [Column(TypeName = "nvarchar(MAX)")]
         public string? ReviewText { get; set; }
 
-        public IEnumerable<Movie> Movies { get; set; } = new List<Movie>();
-        public IEnumerable<User> Users { get; set; } = new List<User>();
+
+        //Navigation Properties
+        public Movie MovieRef { get; set; } = new();
+        public User UserRef { get; set; } = new();
 
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -7,17 +8,13 @@ using System.Threading.Tasks;
 
 namespace Antra.MoviesCRM.Core.Models
 {
-    public class Review
+    public class FavoriteModel
     {
-        [Column(TypeName = "int")]
+
+        public int Id { get; set; }
+        [Required]
         public int MovieId { get; set; }
-        [Column(TypeName = "int")]
+        [Required]
         public int UserId { get; set; }
-        [Column(TypeName = "decimal(3,2)")]
-        public decimal Rating { get; set; }
-
-        [Column(TypeName = "nvarchar(MAX)")]
-        public string? ReviewText { get; set; }
-
     }
 }

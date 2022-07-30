@@ -18,7 +18,7 @@ namespace Antra.MoviesCRM.Core.Entities
 
 
         //navigation properties
-        public IEnumerable<Cast> Casts { get; set; } = new List<Cast>();
-        public IEnumerable<Movie> Movies { get; set; } = new List<Movie>();
+        public virtual Cast CastRef { get; set; } = new Cast();
+        public virtual Movie MovieRef { get; set; } = new Movie();
     }
 }

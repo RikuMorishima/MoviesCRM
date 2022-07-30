@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Antra.MoviesCRM.Core.Models
 {
-    public class UserRole
+    public class UserRoleModel
     {
-        [Column(TypeName = "int")]
         public int UserId { get; set; }
-        [Column(TypeName = "int")]
         public int RoleId { get; set; }
+
+        IEnumerable<RoleModel> Roles { get; set; } = new List<RoleModel>();
+        IEnumerable<UserModel> Users { get; set; } = new List<UserModel>();
     }
 }

@@ -4,6 +4,7 @@ using Antra.MoviesCRM.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Antra.MoviesCRM.Infrastructure.Migrations
 {
     [DbContext(typeof(MovieCrmDbContext))]
-    partial class MovieCrmDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220730182619_Test")]
+    partial class Test
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,6 +35,15 @@ namespace Antra.MoviesCRM.Infrastructure.Migrations
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(MAX)");
 
+                    b.Property<int?>("MovieCastCastId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MovieCastCharacter")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("MovieCastMovieId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(128)");
 
@@ -43,6 +54,8 @@ namespace Antra.MoviesCRM.Infrastructure.Migrations
                         .HasColumnType("nvarchar(MAX)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MovieCastMovieId", "MovieCastCastId", "MovieCastCharacter");
 
                     b.ToTable("Casts");
                 });
@@ -58,6 +71,18 @@ namespace Antra.MoviesCRM.Infrastructure.Migrations
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(MAX)");
 
+                    b.Property<int?>("MovieCrewCrewId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MovieCrewDepartment")
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("MovieCrewJob")
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<int?>("MovieCrewMovieId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(128)");
 
@@ -68,6 +93,8 @@ namespace Antra.MoviesCRM.Infrastructure.Migrations
                         .HasColumnType("nvarchar(MAX)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MovieCrewMovieId", "MovieCrewCrewId", "MovieCrewDepartment", "MovieCrewJob");
 
                     b.ToTable("Crews");
                 });
@@ -88,10 +115,6 @@ namespace Antra.MoviesCRM.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MovieId");
-
-                    b.HasIndex("UserId");
-
                     b.ToTable("Favorites");
                 });
 
@@ -103,11 +126,19 @@ namespace Antra.MoviesCRM.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int?>("MovieGenreGenreId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MovieGenreMovieId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(64)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MovieGenreMovieId", "MovieGenreGenreId");
 
                     b.ToTable("Genres");
                 });
@@ -132,8 +163,38 @@ namespace Antra.MoviesCRM.Infrastructure.Migrations
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2(7)");
 
+                    b.Property<int?>("FavoriteId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ImdbUrl")
                         .HasColumnType("nvarchar(2084)");
+
+                    b.Property<int?>("MovieCastCastId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MovieCastCharacter")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("MovieCastMovieId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MovieCrewCrewId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MovieCrewDepartment")
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("MovieCrewJob")
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<int?>("MovieCrewMovieId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MovieGenreGenreId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MovieGenreMovieId")
+                        .HasColumnType("int");
 
                     b.Property<string>("OriginalLanguage")
                         .HasColumnType("nvarchar(64)");
@@ -147,11 +208,20 @@ namespace Antra.MoviesCRM.Infrastructure.Migrations
                     b.Property<decimal?>("Price")
                         .HasColumnType("decimal(5,2)");
 
+                    b.Property<int?>("PurchaseId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("ReleaseDate")
                         .HasColumnType("datetime2(7)");
 
                     b.Property<decimal?>("Revenue")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("ReviewMovieId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ReviewUserId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("RunTime")
                         .HasColumnType("int");
@@ -166,6 +236,9 @@ namespace Antra.MoviesCRM.Infrastructure.Migrations
                     b.Property<string>("TmdbUrl")
                         .HasColumnType("nvarchar(2084)");
 
+                    b.Property<int?>("TrailerId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(MAX)");
 
@@ -173,6 +246,20 @@ namespace Antra.MoviesCRM.Infrastructure.Migrations
                         .HasColumnType("datetime2(7)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FavoriteId");
+
+                    b.HasIndex("PurchaseId");
+
+                    b.HasIndex("TrailerId");
+
+                    b.HasIndex("MovieGenreMovieId", "MovieGenreGenreId");
+
+                    b.HasIndex("ReviewMovieId", "ReviewUserId");
+
+                    b.HasIndex("MovieCastMovieId", "MovieCastCastId", "MovieCastCharacter");
+
+                    b.HasIndex("MovieCrewMovieId", "MovieCrewCrewId", "MovieCrewDepartment", "MovieCrewJob");
 
                     b.ToTable("Movies");
                 });
@@ -189,8 +276,6 @@ namespace Antra.MoviesCRM.Infrastructure.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("MovieId", "CastId", "Character");
-
-                    b.HasIndex("CastId");
 
                     b.ToTable("MovieCasts");
                 });
@@ -213,8 +298,6 @@ namespace Antra.MoviesCRM.Infrastructure.Migrations
 
                     b.HasKey("MovieId", "CrewId", "Department", "Job");
 
-                    b.HasIndex("CrewId");
-
                     b.ToTable("MovieCrews");
                 });
 
@@ -228,8 +311,6 @@ namespace Antra.MoviesCRM.Infrastructure.Migrations
 
                     b.HasKey("MovieId", "GenreId");
 
-                    b.HasIndex("GenreId");
-
                     b.ToTable("MovieGenres");
                 });
 
@@ -241,7 +322,7 @@ namespace Antra.MoviesCRM.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("MovieId")
+                    b.Property<int>("MovidId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("PurchaseDateTime")
@@ -257,10 +338,6 @@ namespace Antra.MoviesCRM.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MovieId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Purchases");
                 });
@@ -281,8 +358,6 @@ namespace Antra.MoviesCRM.Infrastructure.Migrations
 
                     b.HasKey("MovieId", "UserId");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Reviews");
                 });
 
@@ -298,7 +373,15 @@ namespace Antra.MoviesCRM.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(20)");
 
+                    b.Property<int?>("UserRoleRoleId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserRoleUserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserRoleRoleId", "UserRoleUserId");
 
                     b.ToTable("Roles");
                 });
@@ -321,8 +404,6 @@ namespace Antra.MoviesCRM.Infrastructure.Migrations
                         .HasColumnType("nvarchar(2084)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MovieId");
 
                     b.ToTable("Trailers");
                 });
@@ -365,13 +446,39 @@ namespace Antra.MoviesCRM.Infrastructure.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(16)");
 
+                    b.Property<int?>("PurchaseId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ReviewMovieId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ReviewUserId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Salt")
                         .HasColumnType("nvarchar(1024)");
+
+                    b.Property<int?>("TrailerId")
+                        .HasColumnType("int");
 
                     b.Property<bool?>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("UserRoleRoleId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserRoleUserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("PurchaseId");
+
+                    b.HasIndex("TrailerId");
+
+                    b.HasIndex("ReviewMovieId", "ReviewUserId");
+
+                    b.HasIndex("UserRoleRoleId", "UserRoleUserId");
 
                     b.ToTable("Users");
                 });
@@ -386,194 +493,139 @@ namespace Antra.MoviesCRM.Infrastructure.Migrations
 
                     b.HasKey("RoleId", "UserId");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("UserRoles");
-                });
-
-            modelBuilder.Entity("Antra.MoviesCRM.Core.Entities.Favorite", b =>
-                {
-                    b.HasOne("Antra.MoviesCRM.Core.Entities.Movie", "MovieRef")
-                        .WithMany("FavoritesRef")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Antra.MoviesCRM.Core.Entities.User", "UserRef")
-                        .WithMany("FavoritesRef")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("MovieRef");
-
-                    b.Navigation("UserRef");
-                });
-
-            modelBuilder.Entity("Antra.MoviesCRM.Core.Entities.MovieCast", b =>
-                {
-                    b.HasOne("Antra.MoviesCRM.Core.Entities.Cast", "CastRef")
-                        .WithMany("movieCastsRef")
-                        .HasForeignKey("CastId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Antra.MoviesCRM.Core.Entities.Movie", "MovieRef")
-                        .WithMany("MovieCastsRef")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CastRef");
-
-                    b.Navigation("MovieRef");
-                });
-
-            modelBuilder.Entity("Antra.MoviesCRM.Core.Entities.MovieCrew", b =>
-                {
-                    b.HasOne("Antra.MoviesCRM.Core.Entities.Crew", "CrewRef")
-                        .WithMany("MovieCrewsRef")
-                        .HasForeignKey("CrewId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Antra.MoviesCRM.Core.Entities.Movie", "MovieRef")
-                        .WithMany("MovieCrewsRef")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CrewRef");
-
-                    b.Navigation("MovieRef");
-                });
-
-            modelBuilder.Entity("Antra.MoviesCRM.Core.Entities.MovieGenre", b =>
-                {
-                    b.HasOne("Antra.MoviesCRM.Core.Entities.Genre", "GenreRef")
-                        .WithMany("MovieGenresRef")
-                        .HasForeignKey("GenreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Antra.MoviesCRM.Core.Entities.Movie", "MovieRef")
-                        .WithMany("MovieGenresRef")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("GenreRef");
-
-                    b.Navigation("MovieRef");
-                });
-
-            modelBuilder.Entity("Antra.MoviesCRM.Core.Entities.Purchase", b =>
-                {
-                    b.HasOne("Antra.MoviesCRM.Core.Entities.Movie", "MovieRef")
-                        .WithMany("PurchasesRef")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Antra.MoviesCRM.Core.Entities.User", "UserRef")
-                        .WithMany("PurchasesRef")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("MovieRef");
-
-                    b.Navigation("UserRef");
-                });
-
-            modelBuilder.Entity("Antra.MoviesCRM.Core.Entities.Review", b =>
-                {
-                    b.HasOne("Antra.MoviesCRM.Core.Entities.Movie", "MovieRef")
-                        .WithMany("ReviewsRef")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Antra.MoviesCRM.Core.Entities.User", "UserRef")
-                        .WithMany("ReviewsRef")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("MovieRef");
-
-                    b.Navigation("UserRef");
-                });
-
-            modelBuilder.Entity("Antra.MoviesCRM.Core.Entities.Trailer", b =>
-                {
-                    b.HasOne("Antra.MoviesCRM.Core.Entities.Movie", "MovieRef")
-                        .WithMany("TrailersRef")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("MovieRef");
-                });
-
-            modelBuilder.Entity("Antra.MoviesCRM.Core.Entities.UserRole", b =>
-                {
-                    b.HasOne("Antra.MoviesCRM.Core.Entities.Role", "Roles")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Antra.MoviesCRM.Core.Entities.User", "Users")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Roles");
-
-                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("Antra.MoviesCRM.Core.Entities.Cast", b =>
                 {
-                    b.Navigation("movieCastsRef");
+                    b.HasOne("Antra.MoviesCRM.Core.Entities.MovieCast", null)
+                        .WithMany("Casts")
+                        .HasForeignKey("MovieCastMovieId", "MovieCastCastId", "MovieCastCharacter");
                 });
 
             modelBuilder.Entity("Antra.MoviesCRM.Core.Entities.Crew", b =>
                 {
-                    b.Navigation("MovieCrewsRef");
+                    b.HasOne("Antra.MoviesCRM.Core.Entities.MovieCrew", null)
+                        .WithMany("Crews")
+                        .HasForeignKey("MovieCrewMovieId", "MovieCrewCrewId", "MovieCrewDepartment", "MovieCrewJob");
                 });
 
             modelBuilder.Entity("Antra.MoviesCRM.Core.Entities.Genre", b =>
                 {
-                    b.Navigation("MovieGenresRef");
+                    b.HasOne("Antra.MoviesCRM.Core.Entities.MovieGenre", null)
+                        .WithMany("Genres")
+                        .HasForeignKey("MovieGenreMovieId", "MovieGenreGenreId");
                 });
 
             modelBuilder.Entity("Antra.MoviesCRM.Core.Entities.Movie", b =>
                 {
-                    b.Navigation("FavoritesRef");
+                    b.HasOne("Antra.MoviesCRM.Core.Entities.Favorite", null)
+                        .WithMany("Movies")
+                        .HasForeignKey("FavoriteId");
 
-                    b.Navigation("MovieCastsRef");
+                    b.HasOne("Antra.MoviesCRM.Core.Entities.Purchase", null)
+                        .WithMany("Movies")
+                        .HasForeignKey("PurchaseId");
 
-                    b.Navigation("MovieCrewsRef");
+                    b.HasOne("Antra.MoviesCRM.Core.Entities.Trailer", null)
+                        .WithMany("Movies")
+                        .HasForeignKey("TrailerId");
 
-                    b.Navigation("MovieGenresRef");
+                    b.HasOne("Antra.MoviesCRM.Core.Entities.MovieGenre", null)
+                        .WithMany("Movies")
+                        .HasForeignKey("MovieGenreMovieId", "MovieGenreGenreId");
 
-                    b.Navigation("PurchasesRef");
+                    b.HasOne("Antra.MoviesCRM.Core.Entities.Review", null)
+                        .WithMany("Movies")
+                        .HasForeignKey("ReviewMovieId", "ReviewUserId");
 
-                    b.Navigation("ReviewsRef");
+                    b.HasOne("Antra.MoviesCRM.Core.Entities.MovieCast", null)
+                        .WithMany("Movies")
+                        .HasForeignKey("MovieCastMovieId", "MovieCastCastId", "MovieCastCharacter");
 
-                    b.Navigation("TrailersRef");
+                    b.HasOne("Antra.MoviesCRM.Core.Entities.MovieCrew", null)
+                        .WithMany("Movies")
+                        .HasForeignKey("MovieCrewMovieId", "MovieCrewCrewId", "MovieCrewDepartment", "MovieCrewJob");
+                });
+
+            modelBuilder.Entity("Antra.MoviesCRM.Core.Entities.Role", b =>
+                {
+                    b.HasOne("Antra.MoviesCRM.Core.Entities.UserRole", null)
+                        .WithMany("Roles")
+                        .HasForeignKey("UserRoleRoleId", "UserRoleUserId");
                 });
 
             modelBuilder.Entity("Antra.MoviesCRM.Core.Entities.User", b =>
                 {
-                    b.Navigation("FavoritesRef");
+                    b.HasOne("Antra.MoviesCRM.Core.Entities.Purchase", null)
+                        .WithMany("Users")
+                        .HasForeignKey("PurchaseId");
 
-                    b.Navigation("PurchasesRef");
+                    b.HasOne("Antra.MoviesCRM.Core.Entities.Trailer", null)
+                        .WithMany("Users")
+                        .HasForeignKey("TrailerId");
 
-                    b.Navigation("ReviewsRef");
+                    b.HasOne("Antra.MoviesCRM.Core.Entities.Review", null)
+                        .WithMany("Users")
+                        .HasForeignKey("ReviewMovieId", "ReviewUserId");
+
+                    b.HasOne("Antra.MoviesCRM.Core.Entities.UserRole", null)
+                        .WithMany("Users")
+                        .HasForeignKey("UserRoleRoleId", "UserRoleUserId");
+                });
+
+            modelBuilder.Entity("Antra.MoviesCRM.Core.Entities.Favorite", b =>
+                {
+                    b.Navigation("Movies");
+                });
+
+            modelBuilder.Entity("Antra.MoviesCRM.Core.Entities.MovieCast", b =>
+                {
+                    b.Navigation("Casts");
+
+                    b.Navigation("Movies");
+                });
+
+            modelBuilder.Entity("Antra.MoviesCRM.Core.Entities.MovieCrew", b =>
+                {
+                    b.Navigation("Crews");
+
+                    b.Navigation("Movies");
+                });
+
+            modelBuilder.Entity("Antra.MoviesCRM.Core.Entities.MovieGenre", b =>
+                {
+                    b.Navigation("Genres");
+
+                    b.Navigation("Movies");
+                });
+
+            modelBuilder.Entity("Antra.MoviesCRM.Core.Entities.Purchase", b =>
+                {
+                    b.Navigation("Movies");
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("Antra.MoviesCRM.Core.Entities.Review", b =>
+                {
+                    b.Navigation("Movies");
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("Antra.MoviesCRM.Core.Entities.Trailer", b =>
+                {
+                    b.Navigation("Movies");
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("Antra.MoviesCRM.Core.Entities.UserRole", b =>
+                {
+                    b.Navigation("Roles");
+
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

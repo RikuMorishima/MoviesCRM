@@ -36,5 +36,11 @@ namespace Antra.MoviesCRM.Core.Entities
         [Column(TypeName = "int")]
         public int? AccessFailedCount { get; set; }
 
+
+        // Navigation Properties
+        IEnumerable<UserRole> UserRolesRef { get; set; }
+        public IEnumerable<Review> ReviewsRef { get; set; }
+        public IEnumerable<Purchase> PurchasesRef { get; set; }
+        public IEnumerable<Favorite> FavoritesRef { get; set; }
     }
 }

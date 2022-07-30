@@ -18,7 +18,6 @@ namespace Antra.MoviesCRM.Core.Entities
         [Column(TypeName = "nvarchar(2084)")]
         public string? Name { get; set; }
 
-        public IEnumerable<Movie> Movies { get; set; } = new List<Movie>();
-        public IEnumerable<User> Users { get; set; } = new List<User>();
+        public Movie MovieRef { get; set; } = new();
     }
 }

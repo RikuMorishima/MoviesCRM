@@ -20,9 +20,10 @@ namespace Antra.MoviesCRM.Core.Entities
         [Column(TypeName = "datetime2(7)")]
         public DateTime PurchaseDateTime { get; set; }
         [Column(TypeName = "int")]
-        public int MovidId { get; set; }
+        public int MovieId { get; set; }
 
-        public IEnumerable<Movie> Movies { get; set; } = new List<Movie>();
-        public IEnumerable<User> Users { get; set; } = new List<User>();
+        // Navigation Properties
+        public Movie MovieRef { get; set; } = new();
+        public User UserRef { get; set; } = new();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -7,17 +8,19 @@ using System.Threading.Tasks;
 
 namespace Antra.MoviesCRM.Core.Models
 {
-    public class Crew
+    public class CrewModel
     {
-        [Column(TypeName = "int")]
         public int Id { get; set; }
-        [Column(TypeName = "nvarchar(128)")]
+        [MaxLength(128, ErrorMessage = "Name must be less than 128 characters long")]
         public string? Name { get; set; }
-        [Column(TypeName = "nvarchar(MAX)")]
+
         public string? Gender { get; set; }
-        [Column(TypeName = "nvarchar(MAX)")]
+
         public string? TmdbUrl { get; set; }
-        [Column(TypeName = "nvarchar(2084)")]
+        [MaxLength(2084, ErrorMessage = "Name must be less than 2084 characters long")]
         public string? ProfilePath { get; set; }
+
+        public IEnumerable<MovieCrewModel> Movies { get; set; } = new List<MovieCrewModel>();
+
     }
 }

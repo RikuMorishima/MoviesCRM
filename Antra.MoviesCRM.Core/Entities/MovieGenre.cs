@@ -14,7 +14,7 @@ namespace Antra.MoviesCRM.Core.Entities
         [Column(TypeName = "int")]
         public int GenreId { get; set; }
 
-        public IEnumerable<Movie> Movies { get; set; } = new List<Movie>();
-        public IEnumerable<Genre> Genres { get; set; } = new List<Genre>();
+        public Movie MovieRef { get; set; } = new Movie();
+        public Genre GenreRef { get; set; } = new Genre();
     }
 }

@@ -19,5 +19,8 @@ namespace Antra.MoviesCRM.Core.Entities
         public string? TmdbUrl { get; set; }
         [Column(TypeName = "nvarchar(2084)")]
         public string? ProfilePath { get; set; }
+
+        public IEnumerable<MovieCrew> MovieCrewsRef { get; set; }
+
     }
 }

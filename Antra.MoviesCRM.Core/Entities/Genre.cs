@@ -13,5 +13,8 @@ namespace Antra.MoviesCRM.Core.Entities
         public int Id { get; set; }
         [Column(TypeName = "nvarchar(64)")]
         public string Name { get; set; }
+
+        //Navigation Properties
+        public IEnumerable<MovieGenre> MovieGenresRef { get; set; }
     }
 }

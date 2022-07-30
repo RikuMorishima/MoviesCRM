@@ -28,14 +28,18 @@ namespace Antra.MoviesCRM.Infrastructure.Repository
             if (cast == null) 
                 return null;
 
-            IEnumerable<MovieModel> movieModels = new List<MovieModel>();
-
+            IEnumerable<MovieCastModel> movieCastModels = new List<MovieCastModel>();
             await db.Set<MovieCast>().Where(x => x.CastId == id).ForEachAsync(
-                async delegate(MovieCast mc)
+                async delegate (MovieCast mc)
                 {
-                    var movie = await db.Set<Movie>().FindAsync(mc.MovieId);
-                    if (movie == null) return;
-                    _ = movieModels.Append(new MovieModel()
+                    MovieCastModel movieCastModel = new MovieCastModel()
+                    {
+                        CastId = mc.CastId,
+                        MovieId = mc.MovieId,
+                        Character = mc.Character
+                    };
+                    Movie movie = await db.Set<Movie>().FindAsync(mc.MovieId);
+                    movieCastModel.MovieModelRef = new MovieModel()
                     {
                         Id = movie.Id,
                         Title = movie.Title,
@@ -50,14 +54,14 @@ namespace Antra.MoviesCRM.Infrastructure.Repository
                         OriginalLanguage = movie.OriginalLanguage,
                         ReleaseDate = movie.ReleaseDate,
                         RunTime = movie.RunTime,
-                        Price= movie.Price,
+                        Price = movie.Price,
                         CreatedDate = movie.CreatedDate,
                         UpdatedDate = movie.UpdatedDate,
                         UpdatedBy = movie.UpdatedBy,
                         CreatedBy = movie.CreatedBy
-                    });
+                    };
+                    _ = castModel.Movies.Append(movieCastModel);
                 });
-            castModel.Movies = movieModels;
             return castModel;
         }
 

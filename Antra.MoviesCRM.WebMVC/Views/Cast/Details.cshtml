@@ -20,6 +20,7 @@
         <thead>
             <tr>
                 <th>Movie Name</th>
+                <th>Character Name</th>
             </tr>
         </thead>
         <tbody>
@@ -27,7 +28,8 @@
                 foreach (var value in Model.Movies)
                 {
                     <tr>
-                        <td>@value.Title</td>
+                        <td>@value.MovieModelRef.Title</td>
+                        <td>@value.Character</td>
                     </tr>
                 }
             }

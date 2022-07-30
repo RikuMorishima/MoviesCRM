@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -7,19 +8,19 @@ using System.Threading.Tasks;
 
 namespace Antra.MoviesCRM.Core.Models
 {
-    public class Purchase
+    public class PurchaseModel
     {
-        [Column(TypeName = "int")]
+
         public int Id { get; set; }
-        [Column(TypeName = "int")]
+        [Required]
         public int UserId { get; set; }
-        [Column(TypeName = "uniqueidentifier")]
+        [Required]
         public Guid PurchaseNumber { get; set; }
-        [Column(TypeName = "decimal(18,2)")]
+        [Required]
         public decimal TotalPrice { get; set; }
-        [Column(TypeName = "datetime2(7)")]
+        [Required]
         public DateTime PurchaseDateTime { get; set; }
-        [Column(TypeName = "int")]
+        [Required]
         public int MovidId { get; set; }
     }
 }

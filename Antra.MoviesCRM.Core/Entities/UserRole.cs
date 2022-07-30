@@ -14,7 +14,7 @@ namespace Antra.MoviesCRM.Core.Entities
         [Column(TypeName = "int")]
         public int RoleId { get; set; }
 
-        public IEnumerable<Role> Roles { get; set; } = new List<Role>();
-        public IEnumerable<User> Users { get; set; } = new List<User>();
+        public Role Roles { get; set; } = new();
+        public User Users { get; set; } = new();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -7,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace Antra.MoviesCRM.Core.Models
 {
-    public class Trailer
+    public class TrailerModel
     {
-        [Column(TypeName = "int")]
+
         public int Id { get; set; }
-        [Column(TypeName = "int")]
+
         public int MovieId { get; set; }
-        [Column(TypeName = "nvarchar(2084)")]
+        [MaxLength(2084, ErrorMessage = "Name must be less than 64 characters long")]
         public string? TrailerUrl { get; set; }
-        [Column(TypeName = "nvarchar(2084)")]
+        [MaxLength(2084, ErrorMessage = "Name must be less than 64 characters long")]
         public string? Name { get; set; }
     }
 }

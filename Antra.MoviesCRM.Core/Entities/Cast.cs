@@ -20,5 +20,8 @@ namespace Antra.MoviesCRM.Core.Entities
         [Column(TypeName = "nvarchar(2084)")]
         public string? ProfilePath { get; set; }
 
+        // Navigation Properties
+        public IEnumerable<MovieCast> movieCastsRef { get; set; }
+
     }
 }
