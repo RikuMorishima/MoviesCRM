@@ -44,5 +44,10 @@ namespace Antra.MoviesCRM.Infrastructure.Repository
             db.Entry<T>(entity).State = EntityState.Modified;
             return await db.SaveChangesAsync();
         }
+
+        public int GetCount()
+        {
+            return db.Set<T>().Count();
+        }
     }
 }

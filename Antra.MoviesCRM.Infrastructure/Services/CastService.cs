@@ -17,7 +17,7 @@ namespace Antra.MoviesCRM.Infrastructure.Services
 
         public async Task<CastModel> GetCastDetails(int castId)
         {
-            var castDetails = await ((CastRepository)castRepository).GetByIdAsync(castId);
+            var castDetails = await castRepository.GetByIdAsync(castId);
             return castDetails;
         }
     }

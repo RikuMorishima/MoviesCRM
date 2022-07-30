@@ -7,7 +7,7 @@ namespace Antra.MoviesCRM.Infrastructure.Services
 {
     public class MovieService : IMovieService
     {
-        IMovieRepository movieRepository;
+        readonly IMovieRepository movieRepository;
 
         public MovieService(IMovieRepository movieRepository)
         {
@@ -15,9 +15,21 @@ namespace Antra.MoviesCRM.Infrastructure.Services
 
         }
 
-        public async Task<IEnumerable<MovieModel>> GetMoviesByGenre(int genreId, int pageSize, int pageNumber)
+        public async Task<PaginationModel<IEnumerable<MovieModel>>> GetMoviesByGenre(int genreId, int pageSize, int pageNum)
         {
-            return await ((MovieRepository)movieRepository).GetAllByGenreIdPaginatedAsync(genreId,pageSize,pageNumber);
+         
+            int totalPages = (int) Math.Ceiling((double) movieRepository.GetCount() /pageSize);
+
+            var page = await movieRepository.GetAllByGenreIdPaginatedAsync(genreId, pageSize, pageNum);
+            PaginationModel< IEnumerable < MovieModel> > model = new() 
+            { 
+                Value = page, 
+                PageIndex=pageNum, 
+                PageSize=pageSize,
+                PageCount=totalPages,
+            };
+
+            return model;
         }
     }
 }

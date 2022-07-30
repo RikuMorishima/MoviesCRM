@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Antra.MoviesCRM.Infrastructure.Repository
 {
-    public class MovieRepository : BaseRepositoryAsync<MovieModel>, IMovieRepository
+    public class MovieRepository : BaseRepositoryAsync<Movie>, IMovieRepository
     {
         public MovieRepository(MovieCrmDbContext _context) : base(_context)
         {

@@ -20,6 +20,11 @@ namespace Antra.MoviesCRM.Infrastructure.Repository
             throw new NotImplementedException();
         }
 
+        public int GetCount()
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<int> InsertAsync(User entity)
         {
             throw new NotImplementedException();

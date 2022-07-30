@@ -19,9 +19,12 @@ namespace Antra.MoviesCRM.WebMVC.Controllers
         [HttpGet]
         public async Task<IActionResult> MoviesByGenre(int id, int pageSize=30,int pageNumber=1)
         {
-            var data = await ((MovieService)movieService)
-                .GetMoviesByGenre(id, pageSize, pageNumber);
-            return View(data);
+            if (ModelState.IsValid)
+            {
+                var data = await movieService.GetMoviesByGenre(id, pageSize, pageNumber);
+                return View(data);
+            }
+            return View();
         }
     }
 }

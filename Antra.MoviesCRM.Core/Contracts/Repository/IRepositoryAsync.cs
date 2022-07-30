@@ -14,5 +14,7 @@ namespace Antra.MoviesCRM.Core.Contracts.Repository
         Task<T> GetByIdAsync(int id); // Async method, returns T
 
         Task<IEnumerable<T>> GetAllAsync();
+
+        int GetCount();
     }
 }
