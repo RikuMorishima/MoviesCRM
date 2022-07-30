@@ -1,6 +1,8 @@
-﻿namespace Antra.MoviesCRM.Core.Contracts.Repository
+﻿using Antra.MoviesCRM.Core.Entities;
+
+namespace Antra.MoviesCRM.Core.Contracts.Repository
 {
-    public interface IPurchaseRepository
+    public interface IPurchaseRepository : IRepositoryAsync<Purchase>
     {
     }
 }

@@ -1,6 +1,7 @@
-﻿namespace Antra.MoviesCRM.Core.Contracts.Repository
+﻿using Antra.MoviesCRM.Core.Entities;
+namespace Antra.MoviesCRM.Core.Contracts.Repository
 {
-    public interface IReportRepository
+    public interface IReportRepository //Report what?
     {
     }
 }

@@ -1,13 +1,14 @@
-﻿using System;
+﻿using Antra.MoviesCRM.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Antra.MoviesCRM.Core.Entities
+namespace Antra.MoviesCRM.Core.Models
 {
-    public class Cast
+    public class CastModel
     {
         [Column(TypeName = "int")]
         public int Id { get; set; }
@@ -20,8 +21,8 @@ namespace Antra.MoviesCRM.Core.Entities
         [Column(TypeName = "nvarchar(2084)")]
         public string? ProfilePath { get; set; }
 
-
         //Navigation Properties
-        public IEnumerable<Movie> Movies { get; set; } = new List<Movie>();
+        public IEnumerable<MovieModel> Movies { get; set; } = new List<MovieModel>();
+
     }
 }

@@ -13,13 +13,29 @@ namespace Antra.MoviesCRM.Infrastructure.Data
         public MovieCrmDbContext(DbContextOptions<MovieCrmDbContext> options):base(options)
         {
         }
-        public DbSet<Crew> Crew { get; set; }
-        public DbSet<Favorite> Favorite { get; set; }
-        public DbSet<MovieCrew> MovieCrew { get; set; }
-        public DbSet<Purchase> Purchase { get; set; }
-        public DbSet<Review> Review { get; set; }
-        public DbSet<Role> Role { get; set; }
-        public DbSet<UserRole> UserRole { get; set; }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<MovieCrew>()
+                .HasKey(nameof(MovieCrew.MovieId), nameof(MovieCrew.CrewId),
+                nameof(MovieCrew.Department), nameof(MovieCrew.Job));
+            builder.Entity<MovieCast>()
+                .HasKey(nameof(MovieCast.MovieId), nameof(MovieCast.CastId),
+                nameof(MovieCast.Character));
+            builder.Entity<MovieGenre>()
+                .HasKey(nameof(MovieGenre.MovieId), nameof(MovieGenre.GenreId));
+            builder.Entity<Review>()
+                .HasKey(nameof(Review.MovieId), nameof(Review.UserId));
+            builder.Entity<UserRole>()
+                .HasKey(nameof(UserRole.RoleId), nameof(UserRole.UserId));
+        }
+
+        public DbSet<Crew> Crews { get; set; }
+        public DbSet<Favorite> Favorites { get; set; }
+        public DbSet<MovieCrew> MovieCrews { get; set; }
+        public DbSet<Purchase> Purchases { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
     }
 
 

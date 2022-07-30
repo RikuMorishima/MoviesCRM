@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Antra.MoviesCRM.Core.Entities
+namespace Antra.MoviesCRM.Core.Models
 {
     public class MovieCrew
     {

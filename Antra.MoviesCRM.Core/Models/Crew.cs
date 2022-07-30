@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Antra.MoviesCRM.Core.Entities
+namespace Antra.MoviesCRM.Core.Models
 {
-    public class Cast
+    public class Crew
     {
         [Column(TypeName = "int")]
         public int Id { get; set; }
@@ -19,9 +19,5 @@ namespace Antra.MoviesCRM.Core.Entities
         public string? TmdbUrl { get; set; }
         [Column(TypeName = "nvarchar(2084)")]
         public string? ProfilePath { get; set; }
-
-
-        //Navigation Properties
-        public IEnumerable<Movie> Movies { get; set; } = new List<Movie>();
     }
 }
