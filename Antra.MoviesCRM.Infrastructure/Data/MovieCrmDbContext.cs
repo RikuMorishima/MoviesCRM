@@ -14,7 +14,7 @@ namespace Antra.MoviesCRM.Infrastructure.Data
         {
         }
         protected override void OnModelCreating(ModelBuilder builder)
-        {
+        { 
             builder.Entity<MovieCrew>()
                 .HasKey(nameof(MovieCrew.MovieId), nameof(MovieCrew.CrewId),
                 nameof(MovieCrew.Department), nameof(MovieCrew.Job));
