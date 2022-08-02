@@ -5,9 +5,11 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Antra.MoviesCRM.WebMVC", "Antra.MoviesCRM.WebMVC\Antra.MoviesCRM.WebMVC.csproj", "{D8E6B8E8-A12A-4DDA-B4A2-D65605CC3845}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Antra.MoviesCRM.Core", "Antra.MoviesCRM.Core\Antra.MoviesCRM.Core.csproj", "{AEABAC77-41F8-41E6-BD04-410C8CB1229B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Antra.MoviesCRM.Core", "Antra.MoviesCRM.Core\Antra.MoviesCRM.Core.csproj", "{AEABAC77-41F8-41E6-BD04-410C8CB1229B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Antra.MoviesCRM.Infrastructure", "Antra.MoviesCRM.Infrastructure\Antra.MoviesCRM.Infrastructure.csproj", "{2E3D9C34-A04B-4C97-A633-F5A4AFB717C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Antra.MoviesCRM.Infrastructure", "Antra.MoviesCRM.Infrastructure\Antra.MoviesCRM.Infrastructure.csproj", "{2E3D9C34-A04B-4C97-A633-F5A4AFB717C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Antra.MoviesCRM.WebAPI", "Antra.MoviesCRM.WebAPI\Antra.MoviesCRM.WebAPI.csproj", "{6FE3630B-5AD3-4432-9B98-59384F3B8C8E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{2E3D9C34-A04B-4C97-A633-F5A4AFB717C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E3D9C34-A04B-4C97-A633-F5A4AFB717C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E3D9C34-A04B-4C97-A633-F5A4AFB717C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FE3630B-5AD3-4432-9B98-59384F3B8C8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FE3630B-5AD3-4432-9B98-59384F3B8C8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FE3630B-5AD3-4432-9B98-59384F3B8C8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FE3630B-5AD3-4432-9B98-59384F3B8C8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
