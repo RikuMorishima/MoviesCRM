@@ -25,8 +25,6 @@ namespace Antra.MoviesCRM.Infrastructure.Data
                 .HasKey(nameof(MovieGenre.MovieId), nameof(MovieGenre.GenreId));
             builder.Entity<Review>()
                 .HasKey(nameof(Review.MovieId), nameof(Review.UserId));
-            builder.Entity<UserRole>()
-                .HasKey(nameof(UserRole.RoleId), nameof(UserRole.UserId));
         }
 
         public DbSet<Cast> Casts { get; set; }
@@ -42,7 +40,7 @@ namespace Antra.MoviesCRM.Infrastructure.Data
         public DbSet<Role> Roles { get; set; }
         public DbSet<Trailer> Trailers { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<UserRole> UserRoles { get; set; }
+
     }
 
 
