@@ -12,31 +12,6 @@ namespace Antra.MoviesCRM.Infrastructure.Repository
         {
         }
 
-        public Task<int> DeleteAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Movie>> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Movie> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<int> InsertAsync(Movie entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<int> UpdateAsync(Movie entity)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<IEnumerable<MovieModel>> GetAllByGenreIdPaginatedAsync(int genreId, int pageSize,int pageNum)
         {
             var genre = await db.Set<Genre>().FindAsync(genreId);

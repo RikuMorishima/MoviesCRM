@@ -43,5 +43,10 @@ namespace Antra.MoviesCRM.Core.Models
         public IEnumerable<MovieGenreModel> Genres { get; set; } = new List<MovieGenreModel>();
         public IEnumerable<MovieCrewModel> Crews { get; set; } = new List<MovieCrewModel>();
         public IEnumerable<ReviewModel> Reviews { get; set; } = new List<ReviewModel>();
+
+        public IEnumerable<PurchaseModel> Purchases { get; set; } = new List<PurchaseModel>();
+        public IEnumerable<FavoriteModel> Favorite { get; set; } = new List<FavoriteModel>();
+        public IEnumerable<TrailerModel> Trailers { get; set; } = new List<TrailerModel>();
+
     }
 }

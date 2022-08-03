@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Antra.MoviesCRM.Core.Contracts.Services;
+using Antra.MoviesCRM.Core.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Antra.MoviesCRM.WebAPI.Controllers
@@ -7,5 +9,55 @@ namespace Antra.MoviesCRM.WebAPI.Controllers
     [ApiController]
     public class MoviesController : ControllerBase
     {
+        private readonly IMovieService service;
+        public MoviesController(IMovieService service)
+        {
+            this.service = service;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            return Ok(await service.GetAllModelAsync());
+        }
+
+        [HttpGet]
+        [Route("{id:int}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            return Ok(await service.GetModelByIdAsync(id));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Insert(MovieModel model)
+        {
+            return Ok(await service.InsertModelAsync(model));
+        }
+
+        [HttpPut]
+        [Route("{id:int}")]
+        public async Task<IActionResult> Update(MovieModel model, int id)
+        {
+            if (ModelState.IsValid && id == model.Id)
+            {
+                if (await service.UpdateModelAsync(model) > 0)
+                {
+                    return Ok(model);
+                }
+            }
+            return BadRequest();
+        }
+
+        [HttpDelete]
+        [Route("{id:int}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (await service.DeleteModelAsync(id) > 0)
+            {
+                var msg = new { Message = "Region has been deleted Successfully" };
+                return Ok(msg);
+            }
+            return BadRequest();
+        }
     }
 }
