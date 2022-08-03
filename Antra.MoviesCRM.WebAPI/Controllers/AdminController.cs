@@ -14,6 +14,7 @@ namespace Antra.MoviesCRM.WebAPI.Controllers
         {
             this.adminService = adminService;
         }
+        [HttpGet]
         public async Task<IActionResult> GetTopPurchasedMovies(DateTime? fromDate = null, DateTime? toDate = null, int pageSize = 30, int pageIndex = 1)
         {
             return Ok(await adminService.GetTopPurchases(fromDate,toDate,pageSize,pageIndex));
