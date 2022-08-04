@@ -16,15 +16,15 @@ var host = new HostBuilder()
 try
 {
     var movieService = host.Services.GetRequiredService<MoviesService>();
-    var gitHubBranches = await movieService.GetMovies();
+    var values = await movieService.GetMovies();
 
-    Console.WriteLine($"{gitHubBranches?.Count() ?? 0} GitHub Branches");
+    Console.WriteLine($"{values?.Count() ?? 0} GitHub Branches");
 
-    if (gitHubBranches is not null)
+    if (values is not null)
     {
-        foreach (var gitHubBranch in gitHubBranches)
+        foreach (var item in values)
         {
-            Console.WriteLine($"- {gitHubBranch.Title}");
+            Console.WriteLine($"- {item.Title}");
         }
     }
 }
