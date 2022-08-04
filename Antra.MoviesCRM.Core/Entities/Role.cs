@@ -14,6 +14,5 @@ namespace Antra.MoviesCRM.Core.Entities
         [Column(TypeName = "nvarchar(20)")]
         public string Name { get; set; }
 
-        IEnumerable<UserRole> UserRolesRef { get; set; }
     }
 }
