@@ -1,0 +1,20 @@
+Middleware
+
+* What is a middleware?
+  - Middleware is the software that is assembled into an app pipeline
+    and is used to handle requests and responses.
+	Each middleware component, unless configured specifally, can 
+	choose to pass the request to the next component in the pipeline and
+	can perform work before and after components in the pipeline.
+	
+	Middleware is processed similar to how a stack data structure works.
+	Specifically, when we use a pipeline, we start by preprocessing data
+	sent by the user with each middleware component, "putting" the 
+	components into a stack. When all components are pushed, the stack
+	starts popping the stack and postprocesses the data using popped
+	components as the postprocessing code.
+	I do want to note that while Middleware is processed similar to a stack,
+	it is actually processed using delegates that go after the last delegate 
+	insertted into the Middleware components.
+	
+	

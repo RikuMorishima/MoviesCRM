@@ -1,0 +1,30 @@
+Dependency Injection
+
+* What is an Dependency?
+  - Is an object that another object depends on.
+    For example, we can have a movie object depend on a serivce object.
+	We can, of course, have implement a dependency using the following:
+	    Movie() {
+			MovieService service = new();
+		}
+	Implementing dependency this way has the problem that we need to rewrite 
+	the code (in this case, we need to rewrite Movie) if we want to use a 
+	different implementation. This different implentation can be, for example,
+	unit tests, where we might not want to insert data into the database 
+	used in production. 
+	If the dependency object also has dependencies (for example, MovieService
+	uses MovieRepository), then we need to configure MovieRepository in two 
+	different locations
+	
+* What Dependency Injection Solves
+  - Dependency Injection solves the redundancy of rewriting the code.
+    This has the benefit of being able to use the code to both test and use 
+	in production.
+
+* How does Dependency Injection Solve Problems
+  - Remove the usage of new() within the object along with using abstraction. 
+    This has the benefit that we can choose our own implementation of dependency
+    by inheriting the Interface required to use the dependency
+  - Use Injection. By using a framework or library for creating and destroying 
+    the instance, we can let the program automatically use the desired implementation
+	wherever it is needed.
