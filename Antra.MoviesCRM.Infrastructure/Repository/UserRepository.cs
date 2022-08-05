@@ -8,9 +8,11 @@ namespace Antra.MoviesCRM.Infrastructure.Repository
     public class UserRepository : IUserRepository
     {
         private readonly UserManager<User> _userManager;
-        public UserRepository(UserManager<User> userManager)
+        private readonly SignInManager<User> signInManager;
+        public UserRepository(UserManager<User> userManager, SignInManager<User> signInManager)
         {
-            _userManager = userManager;
+            this._userManager = userManager;
+            this.signInManager = signInManager;
         }
 
         public Task<int> DeleteAsync(int id)
@@ -38,6 +40,12 @@ namespace Antra.MoviesCRM.Infrastructure.Repository
             throw new NotImplementedException();
         }
 
+        public Task<SignInResult> Login(UserLoginModel model)
+        {
+            return signInManager
+                .PasswordSignInAsync(model.Email, model.Password, false, false);
+        }
+
         public Task<IdentityResult> SignUp(UserSignUpModel model)
         {
             User user = new()
@@ -55,5 +63,7 @@ namespace Antra.MoviesCRM.Infrastructure.Repository
         {
             throw new NotImplementedException();
         }
+
+
     }
 }

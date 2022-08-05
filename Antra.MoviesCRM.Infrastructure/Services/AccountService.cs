@@ -14,9 +14,16 @@ namespace Antra.MoviesCRM.Infrastructure.Services
             this.accountRepository = accountRepository;
         }
 
-        public Task<IdentityResult> SignUpAsync(UserSignUpModel model)
+        public Task<SignInResult> Login(UserLoginModel model)
         {
-            return accountRepository.SignUp(model);
+            return this.accountRepository.Login(model);
         }
+
+        public Task<IdentityResult> SignUp(UserSignUpModel model)
+        {
+            return this.accountRepository.SignUp(model);
+        }
+
+
     }
 }

@@ -1,8 +1,13 @@
 using Antra.MoviesCRM.Core.Contracts.Repository;
 using Antra.MoviesCRM.Core.Contracts.Services;
+using Antra.MoviesCRM.Core.Entities;
 using Antra.MoviesCRM.Infrastructure.Data;
 using Antra.MoviesCRM.Infrastructure.Repository;
 using Antra.MoviesCRM.Infrastructure.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +39,32 @@ builder.Services.AddScoped<IGenreService, GenreService>();
 builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<IUserService, UserService>();
 
+
+//Adding Authentication services
+builder.Services.AddIdentity<User, IdentityRole>()
+    .AddEntityFrameworkStores<MovieCrmDbContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.SaveToken = true;
+    options.RequireHttpsMetadata = false;
+    options.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidAudience = builder.Configuration["JWT:ValidAudience"],
+        ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
+    };
+});
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -45,7 +76,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+app.UseAuthentication();
+app.UseAuthorization(); 
 
 app.MapControllers();
 

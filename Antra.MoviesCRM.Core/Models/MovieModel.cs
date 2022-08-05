@@ -28,7 +28,7 @@ namespace Antra.MoviesCRM.Core.Models
         public string? PosterUrl { get; set; }
         [MaxLength(2084, ErrorMessage = "BackDropUrl must be less than 2084 characters long")]
         public string? BackDropUrl { get; set; }
-        [MaxLength(64, ErrorMessage = "OriginalLanguage must be less than 2084 characters long")]
+        [MaxLength(64, ErrorMessage = "OriginalLanguage must be less than 64 characters long")]
         public string? OriginalLanguage { get; set; }
         public DateTime? ReleaseDate { get; set; }
         public int? RunTime { get; set; }

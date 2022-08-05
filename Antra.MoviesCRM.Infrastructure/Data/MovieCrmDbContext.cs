@@ -1,4 +1,5 @@
 ﻿using Antra.MoviesCRM.Core.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,13 +9,14 @@ using System.Threading.Tasks;
 
 namespace Antra.MoviesCRM.Infrastructure.Data
 {
-    public class MovieCrmDbContext: DbContext
+    public class MovieCrmDbContext: IdentityDbContext<User>
     {
         public MovieCrmDbContext(DbContextOptions<MovieCrmDbContext> options):base(options)
         {
         }
         protected override void OnModelCreating(ModelBuilder builder)
         { 
+            base.OnModelCreating(builder);
             builder.Entity<MovieCrew>()
                 .HasKey(nameof(MovieCrew.MovieId), nameof(MovieCrew.CrewId),
                 nameof(MovieCrew.Department), nameof(MovieCrew.Job));
@@ -25,6 +27,7 @@ namespace Antra.MoviesCRM.Infrastructure.Data
                 .HasKey(nameof(MovieGenre.MovieId), nameof(MovieGenre.GenreId));
             builder.Entity<Review>()
                 .HasKey(nameof(Review.MovieId), nameof(Review.UserId));
+
         }
 
         public DbSet<Cast> Casts { get; set; }
@@ -39,7 +42,7 @@ namespace Antra.MoviesCRM.Infrastructure.Data
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Trailer> Trailers { get; set; }
-        public DbSet<User> Users { get; set; }
+        //public DbSet<User> Users { get; set; }
 
     }
 

@@ -14,18 +14,18 @@ namespace Antra.MoviesCRM.Core.Entities
         public string? FirstName { get; set; }
         [Column(TypeName = "nvarchar(128)")]
         public string? LastName { get; set; }
-        [Column(TypeName ="datetime2(7)")]
-        public DateTime? DateOfBirth { get; set; }
+        //[Column(TypeName ="datetime2(7)")]
+        //public DateTime? DateOfBirth { get; set; }
 
-        [Column(TypeName = "nvarchar(1024)")]
-        public string? Salt { get; set; }
+        //[Column(TypeName = "nvarchar(1024)")]
+        //public string? Salt { get; set; }
 
-        [Column(TypeName = "datetime2(7)")]
-        public DateTime? LockoutEndDate { get; set; }
-        [Column(TypeName = "datetime2(7)")]
-        public DateTime? LastLoginDateTime { get; set; }
-        [Column(TypeName = "bit")]
-        public bool? IsLocked { get; set; }
+        //[Column(TypeName = "datetime2(7)")]
+        //public DateTime? LockoutEndDate { get; set; }
+        //[Column(TypeName = "datetime2(7)")]
+        //public DateTime? LastLoginDateTime { get; set; }
+        //[Column(TypeName = "bit")]
+        //public bool? IsLocked { get; set; }
 
 
         // Navigation Properties

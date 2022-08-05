@@ -7,6 +7,6 @@ namespace Antra.MoviesCRM.Core.Contracts.Repository
     public interface IUserRepository : IRepositoryAsync<User>
     {
         Task<IdentityResult> SignUp(UserSignUpModel model);
-
+        Task<SignInResult> Login(UserLoginModel model);
     }
 }
