@@ -14,8 +14,9 @@
         if (Model!=null && Model.Value!=null)
         foreach(var m in Model.Value)
         {
+
             <div class="col col-3">
-                @Html.Partial("_MovieCard",m)
+                <partial name="_Movie" model="m" view-data="ViewData">
             </div>
             }
         }
