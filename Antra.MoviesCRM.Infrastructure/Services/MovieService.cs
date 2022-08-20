@@ -93,7 +93,7 @@ namespace Antra.MoviesCRM.Infrastructure.Services
 
         }
 
-        public async Task<PaginationModel<IEnumerable<MovieModel>>> GetMoviesByGenre(int genreId, int pageSize, int pageNum)
+        public async Task<PaginationModel<IEnumerable<MovieModel>>> GetMoviesByGenre(int genreId, int pageSize=30, int pageNum=1)
         {
          
             int totalPages = (int) Math.Ceiling((double) movieRepository.GetCount() /pageSize);
