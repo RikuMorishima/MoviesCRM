@@ -21,7 +21,7 @@ namespace Antra.MoviesCRM.Core.Entities
         public string? ProfilePath { get; set; }
 
         // Navigation Properties
-        public IEnumerable<MovieCast> movieCastsRef { get; set; }
+        public ICollection<MovieCast> movieCastsRef { get; set; }
 
     }
 }

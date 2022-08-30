@@ -46,7 +46,7 @@ namespace Antra.MoviesCRM.Core.Entities
         [Column(TypeName = "nvarchar(MAX)")]
         public string? CreatedBy { get; set; }
 
-        public IEnumerable<MovieCast> MovieCastsRef { get; set; }
+        public ICollection<MovieCast> MovieCastsRef { get; set; }
         public IEnumerable<MovieCrew> MovieCrewsRef { get; set; }
         public IEnumerable<MovieGenre> MovieGenresRef { get; set; }
         public IEnumerable<Review> ReviewsRef { get; set; }

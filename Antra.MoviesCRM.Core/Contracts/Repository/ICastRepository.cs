@@ -6,6 +6,7 @@ namespace Antra.MoviesCRM.Core.Contracts.Repository
 {
     public interface ICastRepository: IRepositoryAsync<Cast>
     {
-        public Task<CastModel> GetByIdAsync(int id);
+        //public Task<CastModel> GetByIdAsync(int id);
+        public Task<int> AddToMovie(int movieId, int castId, string character);
     }
 }

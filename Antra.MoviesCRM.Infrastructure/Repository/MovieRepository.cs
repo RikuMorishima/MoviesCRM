@@ -55,6 +55,22 @@ namespace Antra.MoviesCRM.Infrastructure.Repository
             return movieModels;
 
         }
+        public async override Task<Movie> GetByIdAsync(int id)
+        {
+            var movie = await db.Set<Movie>()
+                .Include(b => b.MovieCastsRef)
+                .ThenInclude(b=> b.CastRef)
+                .Include(b => b.MovieGenresRef)
+                .Include(b => b.MovieCrewsRef)
+                .Include(b => b.PurchasesRef)
+                .Include(b => b.ReviewsRef)
+                .Include(b => b.TrailersRef)
+                .Include(b => b.FavoritesRef)
+                .SingleOrDefaultAsync();
+
+            return movie;
+            //movie.MovieCastsRef = db.MovieCasts.Include(m => m.MovieCastsRef).ToList();
+        }
 
     }
 }

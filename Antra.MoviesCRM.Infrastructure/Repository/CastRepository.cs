@@ -7,84 +7,96 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Antra.MoviesCRM.Infrastructure.Repository
 {
-    public class CastRepository : BaseRepositoryAsync<CastModel>, ICastRepository
+    public class CastRepository : BaseRepositoryAsync<Cast>, ICastRepository
     {
         public CastRepository(MovieCrmDbContext _context) : base(_context)
         {
 
         }
 
-        public override async Task<CastModel> GetByIdAsync(int id)
+        public async Task<int> AddToMovie(int movieId, int castId, string character)
         {
-            var cast = await db.Set<Cast>().FindAsync(id);
-            CastModel castModel = new CastModel()
+            var cast = await db.Set<Cast>()
+                .Include(b => b.movieCastsRef)
+                .FirstOrDefaultAsync();
+            var movie = await db.Set<Movie>()
+                .Include(b => b.MovieCastsRef)
+                .FirstOrDefaultAsync();
+            var movieCast = new MovieCast()
             {
-                Id = cast.Id,
-                Name = cast.Name,
-                Gender = cast.Gender,
-                TmdbUrl = cast.TmdbUrl,
-                ProfilePath = cast.ProfilePath,
+                MovieId = movieId,
+                CastId = castId,
+                Character = character,
+                MovieRef = movie,
+                CastRef = cast,
             };
-            if (cast == null) 
-                return null;
+            if (cast.movieCastsRef == null)
+            {
+                cast.movieCastsRef = new List<MovieCast>();
+            } 
+            if (movie.MovieCastsRef == null)
+            {
+                movie.MovieCastsRef = new List<MovieCast>();
+            }
+            cast.movieCastsRef.Add(movieCast);
+            movie.MovieCastsRef.Add(movieCast);
+            db.Entry(cast).State = EntityState.Modified;
+            db.Entry(movie).State = EntityState.Modified;
 
-            IEnumerable<MovieCastModel> movieCastModels = new List<MovieCastModel>();
-            await db.Set<MovieCast>().Where(x => x.CastId == id).ForEachAsync(
-                async delegate (MovieCast mc)
-                {
-                    MovieCastModel movieCastModel = new MovieCastModel()
-                    {
-                        CastId = mc.CastId,
-                        MovieId = mc.MovieId,
-                        Character = mc.Character
-                    };
-                    Movie movie = await db.Set<Movie>().FindAsync(mc.MovieId);
-                    if (movie == null)
-                        return;
-                    movieCastModel.MovieModelRef = new MovieModel()
-                    {
-                        Id = movie.Id,
-                        Title = movie.Title,
-                        Overview = movie.Overview,
-                        Tagline = movie.Tagline,
-                        Budget = movie.Budget,
-                        Revenue = movie.Revenue,
-                        ImdbUrl = movie.ImdbUrl,
-                        TmdbUrl = movie.TmdbUrl,
-                        PosterUrl = movie.PosterUrl,
-                        BackDropUrl = movie.BackDropUrl,
-                        OriginalLanguage = movie.OriginalLanguage,
-                        ReleaseDate = movie.ReleaseDate,
-                        RunTime = movie.RunTime,
-                        Price = movie.Price,
-                        CreatedDate = movie.CreatedDate,
-                        UpdatedDate = movie.UpdatedDate,
-                        UpdatedBy = movie.UpdatedBy,
-                        CreatedBy = movie.CreatedBy
-                    };
-                    _ = castModel.Movies.Append(movieCastModel);
-                });
-            return castModel;
+            return await db.SaveChangesAsync();
         }
 
-        public Task<int> InsertAsync(Cast entity)
-        {
-            throw new NotImplementedException();
-        }
+        //public override async Task<Cast> GetByIdAsync(int id)
+        //{
+        //    var cast = await db.Set<Cast>().FindAsync(id);
+        //    CastModel castModel = new CastModel()
+        //    {
+        //        Id = cast.Id,
+        //        Name = cast.Name,
+        //        Gender = cast.Gender,
+        //        TmdbUrl = cast.TmdbUrl,
+        //        ProfilePath = cast.ProfilePath,
+        //    };
+        //    if (cast == null) 
+        //        return null;
 
-        public Task<int> UpdateAsync(Cast entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<IEnumerable<Cast>> IRepositoryAsync<Cast>.GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<Cast> IRepositoryAsync<Cast>.GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+        //    IEnumerable<MovieCastModel> movieCastModels = new List<MovieCastModel>();
+        //    await db.Set<MovieCast>().Where(x => x.CastId == id).ForEachAsync(
+        //        async delegate (MovieCast mc)
+        //        {
+        //            MovieCastModel movieCastModel = new MovieCastModel()
+        //            {
+        //                CastId = mc.CastId,
+        //                MovieId = mc.MovieId,
+        //                Character = mc.Character
+        //            };
+        //            Movie movie = await db.Set<Movie>().FindAsync(mc.MovieId);
+        //            if (movie == null)
+        //                return;
+        //            movieCastModel.MovieModelRef = new MovieModel()
+        //            {
+        //                Id = movie.Id,
+        //                Title = movie.Title,
+        //                Overview = movie.Overview,
+        //                Tagline = movie.Tagline,
+        //                Budget = movie.Budget,
+        //                Revenue = movie.Revenue,
+        //                ImdbUrl = movie.ImdbUrl,
+        //                TmdbUrl = movie.TmdbUrl,
+        //                PosterUrl = movie.PosterUrl,
+        //                BackDropUrl = movie.BackDropUrl,
+        //                OriginalLanguage = movie.OriginalLanguage,
+        //                ReleaseDate = movie.ReleaseDate,
+        //                RunTime = movie.RunTime,
+        //                Price = movie.Price,
+        //                CreatedDate = movie.CreatedDate,
+        //                UpdatedDate = movie.UpdatedDate,
+        //                UpdatedBy = movie.UpdatedBy,
+        //                CreatedBy = movie.CreatedBy
+        //            };
+        //            _ = castModel.Movies.Append(movieCastModel);
+        //        });
+        //    return castModel;
+        //}
     }
 }

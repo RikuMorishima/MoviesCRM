@@ -63,7 +63,25 @@ namespace Antra.MoviesCRM.Infrastructure.Services
 
             if (item != null)
             {
-
+                var movieCasts = new List<MovieCastModel>();
+                foreach(var cast in item.MovieCastsRef)
+                {
+                    var casts = new CastModel
+                    {
+                        Id = cast.CastRef.Id,
+                        Gender = cast.CastRef.Gender,
+                        Name = cast.CastRef.Name,
+                        ProfilePath = cast.CastRef.ProfilePath,
+                        TmdbUrl = cast.CastRef.TmdbUrl
+                    };
+                    movieCasts.Add(new MovieCastModel()
+                    {
+                        MovieId = cast.MovieId,
+                        CastId = cast.CastId,
+                        Character = cast.Character,
+                        Cast = casts,
+                    }) ;
+                }
 
                 MovieModel model = new()
                 {
@@ -85,7 +103,7 @@ namespace Antra.MoviesCRM.Infrastructure.Services
                     UpdatedDate = item.UpdatedDate,
                     UpdatedBy = item.UpdatedBy,
                     CreatedBy = item.CreatedBy,
-
+                    Casts = movieCasts
                 };
                 return model;
             }
@@ -135,6 +153,12 @@ namespace Antra.MoviesCRM.Infrastructure.Services
 
             };
             return await movieRepository.InsertAsync(item);
+        }
+
+        public async Task<bool> MovieExists(int id)
+        {
+            var item = await movieRepository.GetByIdAsync(id);
+            return item != null;
         }
 
         public async Task<int> UpdateModelAsync(MovieModel model)

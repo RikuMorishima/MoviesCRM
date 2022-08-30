@@ -27,7 +27,6 @@ namespace Antra.MoviesCRM.Infrastructure.Data
                 .HasKey(nameof(MovieGenre.MovieId), nameof(MovieGenre.GenreId));
             builder.Entity<Review>()
                 .HasKey(nameof(Review.MovieId), nameof(Review.UserId));
-
         }
 
         public DbSet<Cast> Casts { get; set; }

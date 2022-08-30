@@ -16,16 +16,21 @@ namespace Antra.MoviesCRM.WebAPI.Controllers
         }
 
         [HttpGet]
+        [Route("details")]
         public async Task<IActionResult> GetAll()
         {
             return Ok(await service.GetAllModelAsync());
         }
 
         [HttpGet]
-        [Route("{id:int}")]
+        [Route("details/{id:int}")]
         public async Task<IActionResult> GetById(int id)
         {
-            return Ok(await service.GetModelByIdAsync(id));
+            var result = await service.GetModelByIdAsync(id);
+            if (result != null)
+                return Ok(result);
+            else 
+                return BadRequest();
         }
 
         [HttpPost]
@@ -54,7 +59,7 @@ namespace Antra.MoviesCRM.WebAPI.Controllers
         {
             if (await service.DeleteModelAsync(id) > 0)
             {
-                var msg = new { Message = "Region has been deleted Successfully" };
+                var msg = new { Message = "Movie has been deleted Successfully" };
                 return Ok(msg);
             }
             return BadRequest();
